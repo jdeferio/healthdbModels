@@ -101,10 +101,11 @@ class Provider(Base):
     state = Column(String(2))
     zipcode = Column(String(5))
 
+
 class Imaging(Base):
     __tablename__ = 'imaging'
 
-    id = = Column(UUID, primary_key=True, default=uuid.uuid4()) 
+    id = Column(UUID, primary_key=True, default=uuid.uuid4()) 
     study_date = Column(DateTime)
     patient_id = Column(UUID, ForeignKey('patient.id'), index=True)
     encounter_id = Column(UUID, ForeignKey('encounter.id'), index=True)
@@ -115,10 +116,25 @@ class Imaging(Base):
     sop_code = Column(String)
     sop_description = Column(String)
 
+
 class Condition(Base):
     __tablename__ = 'condition'
 
     id = Column(UUID, primary_key=True, default=uuid.uuid4())
     code = Column(String, ForeignKey('encounter.code'), unique=True)
     description = Column(String)
+
+
+class Medication(Base):
+    __tablename__ = 'medication'
+
+    id = Column(UUID, primary_key=True, default=uuid.uuid4()) 
+    start_date = Column(DateTime)
+    end_date = Column(DateTime)
+    patient_id = Column(UUID, ForeignKey('patient.id'), index=True)
+    encounter_id = Column(UUID, ForeignKey('encounter.id'), index=True)
+    payer_id = Column(UUID, ForeignKey('payer.id'), index=True)
+    med_code = Column(String)
+    med_description = Column(String)
+    condition_id = Column(UUID, ForeignKey('condition.id'), index=True)
 
