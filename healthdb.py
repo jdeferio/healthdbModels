@@ -98,7 +98,7 @@ class Provider(Base):
     __tablename__ = "provider"
 
     id = Column(UUID, primary_key=True, default=uuid.uuid4())
-    organization_id = organization_id = Column(
+    organization_id = Column(
         UUID, ForeignKey("organization.id"), index=True
     )
     name = Column(String)
@@ -144,4 +144,16 @@ class Medication(Base):
     payer_id = Column(UUID, ForeignKey("payer.id"), index=True)
     med_code = Column(String)
     med_description = Column(String)
-    condition_id = Column(UUID, ForeignKey("condition.id"), index=True)
+    condition = Column(String, ForeignKey("condition.code"), index=True)
+
+
+class Procedure(Base):
+    __tablename__ = "procedure"
+
+    id = Column(UUID, primary_key=True, default=uuid.uuid4())
+    date = Column(DateTime)
+    patient_id = Column(UUID, ForeignKey("patient.id"), index=True)
+    encounter_id = Column(UUID, ForeignKey("encounter.id"), index=True)
+    proc_code = Column(String)
+    proc_description = Column(String)
+    condition = Column(String, ForeignKey("condition.code"), index=True)
