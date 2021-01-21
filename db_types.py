@@ -12,7 +12,7 @@ class UUID(types.TypeDecorator):
     impl = psqlUUID
 
     def process_bind_param(self, value, dialect):
-        if pd.isnull():
+        if pd.isnull(value):
             return None
         if not isinstance(value, uuid.UUID):
             if isinstance(value, bytes):
