@@ -1,16 +1,11 @@
 import datetime as dt
-import enum
 import uuid
 
 from sqlalchemy import (
-    JSON,
-    CheckConstraint,
     Column,
     DateTime,
-    Enum,
     Float,
     ForeignKey,
-    SmallInteger,
     String,
     UniqueConstraint,
 )
