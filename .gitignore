@@ -141,8 +141,8 @@ cython_debug/
 .vscode/
 
 # Poetry
-pyproject.toml
-poetry.lock
+# pyproject.toml
+# poetry.lock
 
 # DS_Store cleanup
 .DS_Store
