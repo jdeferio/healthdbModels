@@ -8,7 +8,7 @@ setup(
     url='https://github.com/jdeferio/healthdbModels',
     author='Joseph Deferio',
     author_email='josephjdeferio@gmail.com',
-    packages=['healthdbModels'],
+    packages=['healthdbmodels'],
     install_requires=[
         'pandas', 
         'sqlalchemy',
