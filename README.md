@@ -1,12 +1,15 @@
-### healthdbModels
+## __HealthDB Models__ ##
+
+#### Framework to construct a simple, customizable health database
 <br />
 
-## __Health DB Models__ ##
----
-<br />__Repository Overview__: This repository is intended to outline a database structure to house clinical data of any type. This database schema is constructed using [SQLAlchemy](https://www.sqlalchemy.org) and can be modified to suit any business needs.
+__What is it?__ 
+
+healthdbModels is a python package to outline a database structure to house clinical data of any type. This database schema is constructed using [SQLAlchemy](https://www.sqlalchemy.org) and can be modified to suit any business needs.
+
 <br />
-<br />
-#### __Existing Tables__:
+
+__Existing Tables__:
 - Patient
     - Name, Demographics, Address
 - Encounter
@@ -25,4 +28,33 @@
     - Organizations from which care was delivered
 - Payer
     - Payer organization for which care was delivered
+
 <br />
+
+__Where to get it:__
+
+The source code is currently hosted on GitHub at:
+https://github.com/jdeferio/healthdbModels
+
+Binary installers for the latest released version are _not_ currently available, but the package can be installed using either [Pip](https://pip.pypa.io/en/stable/), [Poetry](https://python-poetry.org) or a package manager of your choosing. 
+
+```sh
+# pip
+pip install git+https://www.github.com/jdeferio/healthdbModels
+```
+
+```sh
+# or poetry
+poetry add git+https://www.github.com/jdeferio/healthdbModels
+```
+<br />
+
+__Dependencies:__
+
+- [Pandas - allows for efficient declaration of field types](https://github.com/pandas-dev/pandas)
+- [SQLAlchemy - allows the user to interact with the ORM on which the database is modeled](https://www.sqlalchemy.org)
+
+<br />
+
+__License:__ [MIT](LICENSE.txt)
+
