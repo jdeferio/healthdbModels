@@ -10,24 +10,17 @@ healthdbModels is a python package to outline a database structure to house clin
 <br />
 
 __Existing Tables__:
-- Patient
-    - Name, Demographics, Address
-- Encounter
-    - Date(s), Encounter type and description, links to [Organization, Payer, Provider]
-- Condition
-    - Code and description to link associated
-- Medication
-    - Medications administered and/or prescribed
-- Procedure
-    - Procedures performed and their associated codes
-- Imaging
-    - Overview of imaging performed
-- Provider
-    - The providers associated with delivery of care
-- Organization
-    - Organizations from which care was delivered
-- Payer
-    - Payer organization for which care was delivered
+Table Name|Description
+:---|:---
+`Patient`| Name, Demographics, Address
+`Encounter`|Date(s), Encounter type and description, links to [Organization, Payer, Provider]
+`Condition`|Code and description to link associated
+`Medication`|Medications administered and/or prescribed
+`Procedure`|Procedures performed and their associated codes
+`Imaging`|Overview of imaging performed
+`Provider`|The providers associated with delivery of care
+`Organization`|Organizations from which care was delivered
+`Payer`|Payer organization for which care was delivered
 
 <br />
 
