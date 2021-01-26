@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "healthdbModels"
 version = "0.1.0"
-description = ""
+description = "Framework to construct a simple, customizable health database"
 authors = ["Joseph Deferio <josephjdeferio@gmail.com>"]
 
 [tool.poetry.dependencies]
