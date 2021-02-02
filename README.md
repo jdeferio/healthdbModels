@@ -14,13 +14,17 @@ Table Name|Description
 :---|:---
 `Patient`| Name, Demographics, Address
 `Encounter`|Date(s), Encounter type and description, links to [Organization, Payer, Provider]
-`Condition`|Code and description to link associated
+`Condition`|Code and description to link associated conditions
 `Medication`|Medications administered and/or prescribed
 `Procedure`|Procedures performed and their associated codes
 `Imaging`|Overview of imaging performed
 `Provider`|The providers associated with delivery of care
 `Organization`|Organizations from which care was delivered
 `Payer`|Payer organization for which care was delivered
+
+<br />
+
+A diagram of the HealthDB schema can be found in this [diagrams.net document](https://drive.google.com/file/d/1kQ0O4FJQK0fhrUB3iL3DIrYdoLaji5wV/view?usp=sharing)
 
 <br />
 
