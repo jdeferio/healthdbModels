@@ -5,7 +5,10 @@
 
 __What is it?__ 
 
-healthdbModels is a python package to outline a database structure to house clinical data of any type. This database schema is constructed using [SQLAlchemy](https://www.sqlalchemy.org) and can be modified to suit any business needs.
+healthdbModels is a python package which defines a database structure to house clinical data of any type. This database schema is constructed using [SQLAlchemy](https://www.sqlalchemy.org) and can be modified to suit any business needs. For instance, if your institution uses the [SNOMED-CT](https://www.snomed.org/snomed-ct/five-step-briefing) terminology, the `Encounter`, `Procedure`, `Condition` (Diagnoses), and `Medication` tables could be specificed accordingly.  Simply apply, adjust, or remove the string length restriction for `code` in each corresponding table, and update `term` to the appropriate terminology enum. A list of terminology standards can be found at the following [HIMSS](https://www.himss.org/terminology-standards) page.
+
+Additional tables could be created to house unique terminology definitions, which could reduce the requisite size of each associated table and improve performance. Simply add another class coresponding to your desired terminology (_see_: `healthdb.SNOMED`, `healthdb.RXNORM`), and join on the appropriate `term` and `code` fields.
+
 
 <br />
 

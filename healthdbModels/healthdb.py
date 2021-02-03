@@ -25,16 +25,34 @@ class DBMetaData(Base):
 
 class Modality(enum.Enum):
     CT = "CT"
-    MR = "MRI"
-    PET = "PET"
+    MR = "MR"
+    PET = "PT"
     XR = "XR"
     US = "US"
+    DX = "DX"
+    CR = "CR"
 
 
 class Degree(enum.Enum):
     MD = "MD"
     DO = "DO"
     NP = "NP"
+    MBBS = "MBBS"
+    PA = "PA"
+
+
+class Terminology(enum.Enum):
+    SNOMED = "SNOMED_CT"
+    LOINC = "LOINC"
+    UCUM = "UCUM"
+    ICD9 = "ICD9"
+    ICD10 = "ICD10"
+    CPT = "CPT"
+    MEDCIN = "MEDCIN"
+    RXNORM = "RXNORM"
+    NDC = "NDC"
+    HCPCS = "HCPCS"
+    RADLEX = "RADLEX"
 
 
 class Patient(Base):
@@ -68,9 +86,9 @@ class Encounter(Base):
     provider_id = Column(UUID, ForeignKey("provider.id"))
     payer_id = Column(UUID, ForeignKey("payer.id"))
     external_id = Column(String, unique=True)
+    term = Column(Enum(Terminology))
+    code = Column(String)
     enc_class = Column(String)
-    enc_code = Column(String(9))
-    enc_description = Column(String)
 
     patient = relationship("Patient", back_populates="encounters")
     conditions = relationship("Condition", back_populates="encounter")
@@ -104,8 +122,8 @@ class Condition(Base):
     start_date = Column(DateTime)
     end_date = Column(DateTime)
     encounter_id = Column(UUID, ForeignKey("encounter.id"))
-    code = Column(String(9))
-    description = Column(String)
+    term = Column(Enum(Terminology))
+    code = Column(String)
 
     encounter = relationship("Encounter", back_populates="conditions")
 
@@ -135,6 +153,7 @@ class Imaging(Base):
     encounter_id = Column(UUID, ForeignKey("encounter.id"))
     modality = Column(Enum(Modality))
     modality_description = Column(String)
+    term = Column(Enum(Terminology))
     body_part_code = Column(String)
     body_part = Column(String)
     sop_code = Column(String)
@@ -151,8 +170,8 @@ class Medication(Base):
     end_date = Column(DateTime)
     encounter_id = Column(UUID, ForeignKey("encounter.id"))
     payer_id = Column(UUID, ForeignKey("payer.id"))
-    med_code = Column(String(9))
-    med_description = Column(String)
+    term = Column(Enum(Terminology))
+    code = Column(String)
 
     payer = relationship("Payer", back_populates="medications")
     encounter = relationship("Encounter", back_populates="medications")
@@ -164,8 +183,8 @@ class Procedure(Base):
     id = Column(UUID, primary_key=True, default=uuid.uuid4)
     date = Column(DateTime)
     encounter_id = Column(UUID, ForeignKey("encounter.id"))
-    code = Column(String(9))
-    description = Column(String)
+    term = Column(Enum(Terminology))
+    code = Column(String)
 
     encounter = relationship("Encounter", back_populates="procedures")
 
@@ -183,3 +202,19 @@ class Payer(Base):
 
     encounters = relationship("Encounter", back_populates="payer")
     medications = relationship("Medication", back_populates="payer")
+
+
+class SNOMED(Base):
+    __tablename__ = "snomed"
+
+    id = Column(UUID, primary_key=True)
+    code = Column(String, unique=True)
+    description = Column(String)
+
+
+class RXNORM(Base):
+    __tablename__ = "rxnorm"
+
+    id = Column(UUID, primary_key=True)
+    code = Column(String, unique=True)
+    description = Column(String)
