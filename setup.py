@@ -3,11 +3,17 @@ try:
 except ImportError:
     from distutils.core import setup
 
+DISTNAME = "healthdbModels"
+AUTHOR = "Joseph Deferio"
+EMAIL = "jdeferio.io@gmail.com"
+DESCRIPTION = "Framework to construct a simple, customizable health database"
+URL = "https://github.com/jdeferio/healthdbModels"
+
 setup(
-    name='healthdbModels',
-    url='https://github.com/jdeferio/healthdbModels',
-    author='Joseph Deferio',
-    author_email='jdeferio.io@gmail.com',
+    name=DISTNAME,
+    url=URL,
+    author=AUTHOR,
+    author_email=EMAIL,
     packages=['healthdbmodels'],
     install_requires=[
         'pandas', 
