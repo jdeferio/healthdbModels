@@ -1,7 +1,8 @@
 import datetime as dt
+import enum
 import uuid
 
-from sqlalchemy import Column, DateTime, Float, ForeignKey, String, UniqueConstraint
+from sqlalchemy import Column, DateTime, Enum, ForeignKey, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -22,21 +23,35 @@ class DBMetaData(Base):
     target_id = Column(UUID)
 
 
+class Modality(enum.Enum):
+    CT = "CT"
+    MR = "MRI"
+    PET = "PET"
+    XR = "XR"
+    US = "US"
+
+
+class Degree(enum.Enum):
+    MD = "MD"
+    DO = "DO"
+    NP = "NP"
+
+
 class Patient(Base):
     __tablename__ = "patient"
 
     id = Column(UUID, primary_key=True, default=uuid.uuid4)
-    pt_lastname = Column(String)
-    pt_firstname = Column(String)
+    last_name = Column(String)
+    first_name = Column(String)
     pt_suffix = Column(String)
-    pt_dob = Column(DateTime)
-    pt_death = Column(DateTime)
-    pt_marital = Column(String)
-    pt_race = Column(String)
-    pt_ethnicity = Column(String)
+    birth_date = Column(DateTime)
+    death_date = Column(DateTime)
+    marital_status = Column(String)
+    race = Column(String)
+    ethnicity = Column(String)
     street = Column(String)
     city = Column(String)
-    state = Column(String)
+    state = Column(String(2))
     zipcode = Column(String(5))
 
     encounters = relationship("Encounter", back_populates="patient")
@@ -52,7 +67,7 @@ class Encounter(Base):
     organization_id = Column(UUID, ForeignKey("organization.id"))
     provider_id = Column(UUID, ForeignKey("provider.id"))
     payer_id = Column(UUID, ForeignKey("payer.id"))
-    external_id = Column(String)
+    external_id = Column(String, unique=True)
     enc_class = Column(String)
     enc_code = Column(String(9))
     enc_description = Column(String)
@@ -89,7 +104,7 @@ class Condition(Base):
     start_date = Column(DateTime)
     end_date = Column(DateTime)
     encounter_id = Column(UUID, ForeignKey("encounter.id"))
-    code = Column(String)
+    code = Column(String(9))
     description = Column(String)
 
     encounter = relationship("Encounter", back_populates="conditions")
@@ -101,7 +116,7 @@ class Provider(Base):
     id = Column(UUID, primary_key=True, default=uuid.uuid4)
     organization_id = Column(UUID, ForeignKey("organization.id"))
     name = Column(String)
-    # degree = Column(Enum)
+    degree = Column(Enum(Degree))
     specialty = Column(String)
     street = Column(String)
     city = Column(String)
@@ -118,7 +133,7 @@ class Imaging(Base):
     id = Column(UUID, primary_key=True, default=uuid.uuid4)
     study_date = Column(DateTime)
     encounter_id = Column(UUID, ForeignKey("encounter.id"))
-    modality = Column(String)
+    modality = Column(Enum(Modality))
     modality_description = Column(String)
     body_part_code = Column(String)
     body_part = Column(String)
@@ -136,7 +151,7 @@ class Medication(Base):
     end_date = Column(DateTime)
     encounter_id = Column(UUID, ForeignKey("encounter.id"))
     payer_id = Column(UUID, ForeignKey("payer.id"))
-    med_code = Column(String)
+    med_code = Column(String(9))
     med_description = Column(String)
 
     payer = relationship("Payer", back_populates="medications")
@@ -149,7 +164,7 @@ class Procedure(Base):
     id = Column(UUID, primary_key=True, default=uuid.uuid4)
     date = Column(DateTime)
     encounter_id = Column(UUID, ForeignKey("encounter.id"))
-    code = Column(String)
+    code = Column(String(9))
     description = Column(String)
 
     encounter = relationship("Encounter", back_populates="procedures")
