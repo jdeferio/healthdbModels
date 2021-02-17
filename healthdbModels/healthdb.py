@@ -59,6 +59,7 @@ class Patient(Base):
     __tablename__ = "patient"
 
     id = Column(UUID, primary_key=True, default=uuid.uuid4)
+    mrn = Column(String)
     last_name = Column(String)
     first_name = Column(String)
     pt_suffix = Column(String)
