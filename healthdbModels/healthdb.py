@@ -71,7 +71,7 @@ class Patient(Base):
     ethnicity = Column(String)
     street = Column(String)
     city = Column(String)
-    state = Column(String(2))
+    state = Column(String)
     zipcode = Column(String(5))
 
     encounters = relationship("Encounter", back_populates="patient")
@@ -109,7 +109,7 @@ class Organization(Base):
     name = Column(String)
     street = Column(String)
     city = Column(String)
-    state = Column(String(2))
+    state = Column(String)
     zipcode = Column(String(5))
     phone = Column(Telephone)
 
@@ -140,7 +140,7 @@ class Provider(Base):
     specialty = Column(String)
     street = Column(String)
     city = Column(String)
-    state = Column(String(2))
+    state = Column(String)
     zipcode = Column(String(5))
 
     organizations = relationship("Organization", back_populates="providers")
@@ -198,7 +198,7 @@ class Payer(Base):
     name = Column(String)
     street = Column(String)
     city = Column(String)
-    state = Column(String(2))
+    state = Column(String)
     zipcode = Column(String(5))
     phone = Column(Telephone)
 
