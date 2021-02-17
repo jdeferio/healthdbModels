@@ -65,6 +65,8 @@ class Patient(Base):
     birth_date = Column(DateTime)
     death_date = Column(DateTime)
     marital_status = Column(String)
+    sex = Column(String)
+    gender = Column(String)
     race = Column(String)
     ethnicity = Column(String)
     street = Column(String)
